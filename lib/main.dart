@@ -84,6 +84,9 @@ class MyTextField extends StatefulWidget {
 }
 
 class _MyTextFieldState extends State<MyTextField> {
+  final TextEditingController nameController =TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -93,6 +96,7 @@ class _MyTextFieldState extends State<MyTextField> {
         SizedBox(
         width: 400,
         child: TextFormField(
+          controller: nameController,
           decoration: const InputDecoration(
             labelText: 'Enter your name',
             border: OutlineInputBorder(),
@@ -104,6 +108,7 @@ class _MyTextFieldState extends State<MyTextField> {
         SizedBox(
         width: 400,
         child: TextFormField(
+          controller: emailController,
           decoration:const InputDecoration(
             labelText: 'Enter your email  address',
             border: OutlineInputBorder(),
@@ -115,6 +120,7 @@ class _MyTextFieldState extends State<MyTextField> {
         SizedBox(
           width: 400,
          child: TextFormField(
+          controller: passwordController,
           decoration:const InputDecoration(
             labelText: 'Enter your password',
             border: OutlineInputBorder(),
