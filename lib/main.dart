@@ -132,4 +132,11 @@ class _MyTextFieldState extends State<MyTextField> {
       ],
     );
   }
+  @override 
+  void dispose(){
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 }
