@@ -87,9 +87,13 @@ class _MyTextFieldState extends State<MyTextField> {
   final TextEditingController nameController =TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  final GlobalKey <FormState> _formKey = GlobalKey <FormState>();
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Form(
+      key: _formKey,
+    child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const SizedBox(height: 30,),
@@ -102,6 +106,13 @@ class _MyTextFieldState extends State<MyTextField> {
             border: OutlineInputBorder(),
 
           ),
+          validator: (value){
+            if(value == null || value.isEmpty){
+              return 'Please, enter your name';
+            }
+            return null;
+            
+          },
         ),
         ),
         const SizedBox(height: 15,),
@@ -110,9 +121,20 @@ class _MyTextFieldState extends State<MyTextField> {
         child: TextFormField(
           controller: emailController,
           decoration:const InputDecoration(
-            labelText: 'Enter your email  address',
+            labelText: 'Enter a valid email  address',
             border: OutlineInputBorder(),
           ),
+          validator: (value){
+            if (value == null || value.isEmpty){
+              return 'Please a valid email';
+            }
+            const emailPattern = 
+            r'^[a-zA-Z0-9._%-+]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+            if(!RegExp(emailPattern).hasMatch(value)){
+              return 'Please enter a valid email';
+            }
+            return null ; 
+          },
 
         ),
         ),
@@ -127,9 +149,20 @@ class _MyTextFieldState extends State<MyTextField> {
       
 
           ),
+          validator: (value){
+            if(value == null || value.isEmpty){
+              return 'Enter a valid password';
+            }
+            else if(value.length < 6){
+              return 'Password must be at least 6 characters';
+            }
+            return null ; 
+            
+          },
         ),
         ),
       ],
+    ),
     );
   }
   @override 
